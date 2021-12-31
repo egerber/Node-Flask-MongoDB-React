@@ -7,21 +7,18 @@
 <img style="padding:10;height:50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png">
 </div>
 
-Boilerplate Setup for a (containerized) fullstack application with a Node server (typescript), Flask server (Python), MongoDB in the backend and a React application (typescript) in the backend
-
 
 
 # Containerized Setup
 
 ## 1. Prerequisites
-install docker (Link) and docker-compose
+install docker and docker-compose
 
 ## 2. Starting‚
-First install Docker and docker-compose
 
-afterwards runs
+run
 <code>docker-compose build</code>
-<code>docker up</code> or <code>docker-compose up -d</code> (deamon)
+and <code>docker-compose up -d</code> (deamon)
 
 ### Service specific output (stdout)
 * <b>Flask</b>
@@ -57,6 +54,7 @@ npm run serve
 </pre>
 
 ### Flask (folder ./flask)
+will use the configurations specified in [.env](flask/.env)
 <pre>
 pip install -r requirements.txt
 flask run
@@ -69,9 +67,10 @@ npm run start
 </pre>
 
 ### MongoDB
-mongoDB must ran as a service on port 27027. You can either install and run mongodb locally or connect to a remote server. If you want to only run mongodb in a container execute
+For the current setup, mongoDB must run on port 27027. You can either install and run mongodb locally or connect to a remote server. The default credentials for mongodb are:
 <pre>
-docker run --volume=...
+MONGO_INITDB_DATABASE: my_initial_db
+MONGO_INITDB_ROOT_USERNAME: root
+MONGO_INITDB_ROOT_PASSWORD: rootpassword
 </pre>
-
 
