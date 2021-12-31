@@ -1,0 +1,36 @@
+version: '3'
+services:
+  node:
+    build: ./node
+    command: npm run serve
+    volumes:
+      - ./data/node:/data
+      - ./node:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - '3000:3000'
+  flask:
+    build: ./flask
+    image: flask
+    env_file:
+      - ./flask/.env
+    command: flask run --host=0.0.0.0
+    restart: unless-stopped
+    container_name: 'flask-server'
+    volumes:
+      - ./data/flask:/data
+      - ./flask/:/app
+    ports:
+      - "127.0.0.1:5000:5000"
+  mongo:
+    image: 'mongo'
+    environment:
+      MONGO_INITDB_DATABASE: my_initial_db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - ./data/db:/data/db
+    restart: always
+    container_name: 'mongo-db'
+    ports:
+      - '27017-27019:27017-27019'
